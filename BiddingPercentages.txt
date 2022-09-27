@@ -1,0 +1,4 @@
+5 made the bid 15 73.87% of the time
+5 made the bid 20 62.89% of the time
+5 made the bid 25 49.25% of the time
+5 made the bid 30 28.95% of the time
