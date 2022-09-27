@@ -1,0 +1,3 @@
+The classes are implemented in a half-opaque object design. Makefiles are kind of annoying for such a small project, so I just had the files include each other instead of
+implementing header files & opaque object design. I would eventually like to implement opaque object design, so I do unnecessary casting in my objects in order to very easily
+change it to opaque object design later on.
