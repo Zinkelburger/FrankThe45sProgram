@@ -84,7 +84,11 @@ void TableGenerator::discard() {
 // pair is bidAmount, suit
 std::pair<int, Suit::Suit> TableGenerator::getBid(const std::vector<int>& bidHistory) {
     // bid whatever it was told to bid
-    return std::make_pair(bidAmount, Suit::DIAMONDS);
+    if (isBiddingPlayer) {
+        return std::make_pair(bidAmount, Suit::DIAMONDS);
+    } else {
+        return std::make_pair(0, Suit::ACE_OF_HEARTS);
+    }
 }
 
 // the player is forced to bid
@@ -96,13 +100,25 @@ Suit::Suit TableGenerator::bagged() {
 x45s::Card TableGenerator::playCard(const std::vector<x45s::Card>& cardsPlayedThisHand) {
     // if no cards played, play its best card
     if (cardsPlayedThisHand.size() <= 0) {
-        x45s::Card returnCard;
+        x45s::Card maxTrump(-100, trump);
+        int indexFound = -1;
         // can't use the > operator for non-trump as suitLed is not defined
         for(int i = 0; i < hand.size(); i++) {
-            if (hand.at(i).getSuit() == trump)
+            if (hand.at(i).getSuit() == trump && maxTrump > hand.at(i)) {
+                maxTrump = hand.at(i);
+                indexFound = i;
+            }
         }
  
-        return returnCard;
+        // play the best trump if you have a trump
+        if (maxTrump.getValue() > -100) {
+            hand.erase(hand.begin() + indexFound);
+            return maxTrump;
+        // if you don't have trump, play your lowest offsuite
+        } else {
+            
+        }
+
     }
 
     // if it can win, play its best card. Otherwise play the worst card it legally can.

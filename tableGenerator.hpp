@@ -6,7 +6,10 @@
 
 class TableGenerator : public x45s::Player {
     int bidAmount;
+    bool isBiddingPlayer;
     std::vector<int> values;
+
+    TableGenerator(bool inpIsBiddingPlayer) : Player(), isBiddingPlayer(inpIsBiddingPlayer) {}
 
     // testing occurs always in Diamonds
     // allows the main program to give the player a particular hand to test it
